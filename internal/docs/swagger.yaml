@@ -1,0 +1,78 @@
+consumes:
+- application/json
+info:
+  contact: {}
+  title: Entra Playground API
+  version: "1.0"
+paths:
+  /authorize:
+    get:
+      description: |-
+        OAuth 2.0 Authorization Mediation Endpoint.
+        See https://datatracker.ietf.org/doc/html/draft-ietf-oauth-browser-based-apps#name-token-mediating-backend
+      parameters:
+      - description: OAuth 2.0 Redirect URI
+        in: query
+        name: redirect_uri
+        required: true
+        type: string
+      - description: OAuth 2.0 State
+        in: query
+        name: state
+        type: string
+      - description: PKCE Code Challenge
+        in: query
+        name: code_challenge
+        type: string
+      - description: PKCD Code Challenge Method
+        in: query
+        name: code_challenge_method
+        type: string
+      responses:
+        "302":
+          description: Found
+      summary: Get a token
+  /token:
+    post:
+      consumes:
+      - application/x-www-form-urlencoded
+      description: |-
+        OAuth 2.0 Token Mediation Endpoint.
+        See https://datatracker.ietf.org/doc/html/draft-ietf-oauth-browser-based-apps#name-token-mediating-backend
+      parameters:
+      - description: OAuth 2.0 Authorization Code
+        in: formData
+        name: code
+        required: true
+        type: string
+      - description: PKCE Code Verifier
+        in: formData
+        name: code_verifier
+        type: string
+      - description: OAuth 2.0 Redirect URI
+        in: formData
+        name: redirect_uri
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema: {}
+      summary: Get a token
+  /validate:
+    get:
+      responses: {}
+      security:
+      - OAuth2Entra: []
+      summary: Get a token
+produces:
+- application/json
+securityDefinitions:
+  OAuth2Entra:
+    authorizationUrl: http://localhost:8080/api/authorize
+    flow: accessCode
+    tokenUrl: http://localhost:8080/api/token
+    type: oauth2
+swagger: "2.0"

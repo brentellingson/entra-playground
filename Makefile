@@ -12,7 +12,7 @@ format: generate
 	gofumpt -l -w .
 
 generate: restore
-	swag init --output ./internal/api/docs
+	swag init --generalInfo ./internal/api/server.go --output ./internal/docs
 
 restore:
 	go get -v ./...

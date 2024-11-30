@@ -20,20 +20,20 @@ The client credential flow demonstrates system-to-system calls to the Microsoft 
 flowchart LR
     Browser
     API["`Web API
-        /graphql/client-credentials`"]
-    Entra
+        <code>/client-credentials</code>`"]
+    Entra[Entra Identity]
     GraphQL
 
-    Browser -->|1 unauthenticated| API
-    API -->|2 client-credential-grant| Entra
-    API -->|3 client token| GraphQL
+    Browser -->|"&nbsp;① unauthenticated"| API
+    API -->|"&nbsp;② client-credential flow"| Entra
+    API -->|"&nbsp;③ client token"| GraphQL
 ```
 
 ### On-Behalf-Of Flow
 
 The on-behalf-of flow demonstrates a mediated user call to the Microsoft GraphQL
 
-1. user requests a user token froom Entra using Authorization Code flow
+1. user requests a user token froom Entra using Auth Code flow
 2. user calls web API using user token
 3. WebAPI requests an impersonation token from Entra using on-behalf-of flow
 4. WebAPI calls GraphQL using impersonation token
@@ -42,24 +42,24 @@ The on-behalf-of flow demonstrates a mediated user call to the Microsoft GraphQL
 flowchart LR
     Browser
     API["`Web API
-        /graphql/on-behalf-of`"]
+        <code>/on-behalf-of</code>`"]
     Entra
     GraphQL
 
-    Browser -->|1 authorization code| Entra
-    Browser -->|2 user token| API
-    API -->|3 on-behalf-of| Entra
-    API -->|4 impersonation token| GraphQL
+    Browser -->|"&nbsp;① auth code flow"| Entra
+    Browser -->|"&nbsp;② user token"| API
+    API -->|"&nbsp;③ on-behalf-of flow"| Entra
+    API -->|"&nbsp;④ impersonation token"| GraphQL
 ```
 
 ## Endpoints:
 
 Endpoints to test the flow:
-* `/graphql/client-credential` : call microsoft graphql with client credential flow
-* `/graphql/on-behalf-of`: call microsoft graphql with on-behalf-of flow
+* `/api/graphql/client-credential` : call microsoft graphql with client credential flow
+* `/api/graphql/on-behalf-of`: call microsoft graphql with on-behalf-of flow
 
 Endpoints to mediate and test the authorization code flow:
 
-* `/oauth/validate`: validate the oauth jwt access token
-* `/oauth/authorize`: oauth authorize endpoint mediator
-* `/oauth/token`: oauth token endpont mediator 
+* `/api/oauth/validate`: validate the oauth jwt access token
+* `/api/oauth/authorize`: oauth authorize endpoint mediator
+* `/api/oauth/token`: oauth token endpont mediator 

@@ -1,0 +1,113 @@
+{
+    "consumes": [
+        "application/json"
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "swagger": "2.0",
+    "info": {
+        "title": "Entra Playground API",
+        "contact": {},
+        "version": "1.0"
+    },
+    "paths": {
+        "/authorize": {
+            "get": {
+                "description": "OAuth 2.0 Authorization Mediation Endpoint.\nSee https://datatracker.ietf.org/doc/html/draft-ietf-oauth-browser-based-apps#name-token-mediating-backend",
+                "summary": "Get a token",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "OAuth 2.0 Redirect URI",
+                        "name": "redirect_uri",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "OAuth 2.0 State",
+                        "name": "state",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "PKCE Code Challenge",
+                        "name": "code_challenge",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "PKCD Code Challenge Method",
+                        "name": "code_challenge_method",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "302": {
+                        "description": "Found"
+                    }
+                }
+            }
+        },
+        "/token": {
+            "post": {
+                "description": "OAuth 2.0 Token Mediation Endpoint.\nSee https://datatracker.ietf.org/doc/html/draft-ietf-oauth-browser-based-apps#name-token-mediating-backend",
+                "consumes": [
+                    "application/x-www-form-urlencoded"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "Get a token",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "OAuth 2.0 Authorization Code",
+                        "name": "code",
+                        "in": "formData",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "PKCE Code Verifier",
+                        "name": "code_verifier",
+                        "in": "formData"
+                    },
+                    {
+                        "type": "string",
+                        "description": "OAuth 2.0 Redirect URI",
+                        "name": "redirect_uri",
+                        "in": "formData",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {}
+                    }
+                }
+            }
+        },
+        "/validate": {
+            "get": {
+                "security": [
+                    {
+                        "OAuth2Entra": []
+                    }
+                ],
+                "summary": "Get a token",
+                "responses": {}
+            }
+        }
+    },
+    "securityDefinitions": {
+        "OAuth2Entra": {
+            "type": "oauth2",
+            "flow": "accessCode",
+            "authorizationUrl": "http://localhost:8080/api/authorize",
+            "tokenUrl": "http://localhost:8080/api/token"
+        }
+    }
+}
