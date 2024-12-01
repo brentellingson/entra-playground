@@ -1,6 +1,9 @@
 package api
 
-import "github.com/gin-gonic/gin"
+import (
+	"github.com/brentellingson/entra-playground/internal/config"
+	"github.com/gin-gonic/gin"
+)
 
 // Server represents the API server.
 //
@@ -12,11 +15,13 @@ import "github.com/gin-gonic/gin"
 //	@SecurityDefinitions.OAuth2.AccessCode	OAuth2Entra
 //	@AuthorizationUrl						http://localhost:8080/api/authorize
 //	@TokenUrl								http://localhost:8080/api/token
-type Server struct{}
+type Server struct {
+	Cfg *config.Config
+}
 
 // NewServer creates a new API server.
-func NewServer() *Server {
-	return &Server{}
+func NewServer(cfg *config.Config) *Server {
+	return &Server{cfg}
 }
 
 // Register registers the API routes.
