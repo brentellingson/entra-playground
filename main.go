@@ -1,22 +1,22 @@
 package main
 
 import (
+	"net/http"
+
 	"github.com/brentellingson/entra-playground/internal/api"
 	"github.com/brentellingson/entra-playground/internal/config"
 	_ "github.com/brentellingson/entra-playground/internal/docs"
-	"github.com/gin-gonic/gin"
-	swaggerFiles "github.com/swaggo/files"
-	ginSwagger "github.com/swaggo/gin-swagger"
+	httpSwagger "github.com/swaggo/http-swagger/v2"
 )
 
 func main() {
 	cfg := config.NewConfig()
-
-	r := gin.Default()
 	server := api.NewServer(cfg)
-	server.Register(r)
+	mux := server.Register()
 
-	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
-	r.GET("/", func(c *gin.Context) { c.Redirect(302, "/swagger/index.html") })
-	_ = r.Run(":8080")
+	mux.HandleFunc("GET /swagger/", httpSwagger.Handler())
+	mux.HandleFunc("GET /", func(w http.ResponseWriter, r *http.Request) {
+		http.Redirect(w, r, "/swagger/index.html", http.StatusFound)
+	})
+	http.ListenAndServe(":8080", mux)
 }

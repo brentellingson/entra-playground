@@ -5,7 +5,7 @@ info:
   title: Entra Playground API
   version: "1.0"
 paths:
-  /authorize:
+  /api/authorize:
     get:
       description: |-
         OAuth 2.0 Authorization Mediation Endpoint.
@@ -32,7 +32,7 @@ paths:
         "302":
           description: Found
       summary: Get a token
-  /token:
+  /api/token:
     post:
       consumes:
       - application/x-www-form-urlencoded
@@ -61,7 +61,7 @@ paths:
           description: OK
           schema: {}
       summary: Get a token
-  /validate:
+  /api/validate:
     get:
       responses: {}
       security:

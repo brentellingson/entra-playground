@@ -8,14 +8,14 @@ import (
 
 // OAuthConfiguration struct to hold the OAuth configuration values
 type OAuthConfiguration struct {
-	ClientID         string
-	ClientSecret     string
-	AuthorizationURL string
-	TokenURL         string
-	Scopes           string
-	Audience         string
-	Issuer           string
-	JwksURI          string
+	ClientID              string
+	ClientSecret          string
+	AuthorizationEndpoint string
+	TokenEndpoint         string
+	Scope                 string
+	JwksURI               string
+	Issuer                string
+	Audience              string
 }
 
 // Config struct to hold all the configuration values

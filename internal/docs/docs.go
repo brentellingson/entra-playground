@@ -21,7 +21,7 @@ const docTemplate = `{
     "host": "{{.Host}}",
     "basePath": "{{.BasePath}}",
     "paths": {
-        "/authorize": {
+        "/api/authorize": {
             "get": {
                 "description": "OAuth 2.0 Authorization Mediation Endpoint.\nSee https://datatracker.ietf.org/doc/html/draft-ietf-oauth-browser-based-apps#name-token-mediating-backend",
                 "summary": "Get a token",
@@ -59,7 +59,7 @@ const docTemplate = `{
                 }
             }
         },
-        "/token": {
+        "/api/token": {
             "post": {
                 "description": "OAuth 2.0 Token Mediation Endpoint.\nSee https://datatracker.ietf.org/doc/html/draft-ietf-oauth-browser-based-apps#name-token-mediating-backend",
                 "consumes": [
@@ -99,7 +99,7 @@ const docTemplate = `{
                 }
             }
         },
-        "/validate": {
+        "/api/validate": {
             "get": {
                 "security": [
                     {

@@ -1,7 +1,11 @@
 WebAPIA:
-  ClientID: faad2a89-0a9c-437a-a10f-2dfb03c4aea0
-  AuthorizationURL:
-  TokenURL:
-  Scope:
-  IssuerURI:
-  JwksURI:
+  ClientID: e482629c-094f-4c7d-a11e-5d8d48bec93c
+  AuthorizationEndpoint: https://login.microsoftonline.com/12b4fc86-4f95-4ddb-adcc-9cb57782dbaf/oauth2/v2.0/authorize
+  TokenEndpoint: https://login.microsoftonline.com/12b4fc86-4f95-4ddb-adcc-9cb57782dbaf/oauth2/v2.0/token
+  Scope: api://e482629c-094f-4c7d-a11e-5d8d48bec93c/ReadWrite
+  # Scope: https://graph.microsoft.com/User.Read
+  JwksURI: https://login.microsoftonline.com/12b4fc86-4f95-4ddb-adcc-9cb57782dbaf/discovery/v2.0/keys
+  Issuer: https://login.microsoftonline.com/12b4fc86-4f95-4ddb-adcc-9cb57782dbaf/v2.0
+  Audience: api://e482629c-094f-4c7d-a11e-5d8d48bec93c
+
+
